@@ -304,8 +304,7 @@ function loginCallBack(rspObj) {
 }
 
 function checkAvailableLogin() {
-    document.getElementById("qqlogin").style.display = "none";
-    document.getElementById("wxlogin").style.display = "none";
+
 
     sdk.getAvailableLoginType({appid: appid}, function (rsp) {
         if (rsp && rsp.result === 0) {
