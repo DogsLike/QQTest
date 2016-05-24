@@ -279,21 +279,11 @@ function loginCallBack(rspObj) {
         ls.setItem("refreshToken", rspObj.refreshToken);
         ls.setItem("nickName", rspObj.nickName);
         ls.setItem("avatarUrl", rspObj.avatarUrl);
-
-        //Ajax后台登录
-        $.ajax({
-            type: "POST",
-            url: "http://url/serverlogin",
-            data: rspObj,
-            dataType: "json",
-            success: function (data) {
-            },
-            error: function () {
-            }
-        });
-        //其它逻辑
-
-        //加载/跳转游戏主界面
+        
+        document.getElementById("qqlogin").style.display = "none";
+        document.getElementById("wxlogin").style.display = "none";
+        
+        //调用 TS 登录
         loginSuccessCallBack(rspObj.qbopenid,rspObj.nickName,rspObj.avatarUrl);  
         
     } else if (rspObj.result == 602) {
