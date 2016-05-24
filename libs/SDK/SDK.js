@@ -286,7 +286,7 @@ function loginCallBack(rspObj) {
         alert("当前浏览器不支持该登录方式！");
     } else {
         //登录失败处理逻辑
-        alert("登录失败"+rspObj.msg);
+        alert("登录失败"+rspObj.result+"  msg:"+rspObj.msg);
     }
 }
 
