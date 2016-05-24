@@ -4,6 +4,14 @@ var appsigdata;
 var baseurl;
 var loginSuccessCallBack;
 
+var sessionInfo = {
+    qbopenid: "",
+    qbopenkey: "",
+    refreshToken: '',
+    nickName: '',
+    avatarUrl: ''
+};
+
 var store = {
     lcst: window.localStorage,
     read: function (key) {
@@ -296,8 +304,6 @@ function loginCallBack(rspObj) {
 }
 
 function checkAvailableLogin() {
-
-
     sdk.getAvailableLoginType({appid: appid}, function (rsp) {
         if (rsp && rsp.result === 0) {
             var types = rsp.loginTypes, html = "";           
