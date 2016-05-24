@@ -152,6 +152,7 @@ function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
         checkLogin();   
     }else
     {
+        util.toast("用户登录！：" + info.nickName);
         document.getElementById("qqlogin").style.display = "block";
         $("#qqlogin").attr("src",info.avatarUrl);   
     }
