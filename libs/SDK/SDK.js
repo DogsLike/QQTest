@@ -137,6 +137,9 @@ function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
     appsig = appsig;
     appsigdata = appsigdata;
     baseurl = baseUrl;
+    
+    alert(appsig+"~~"+appid+"~~"+appsigdata+"~~");
+    
     loginSuccessCallBack = successCallback;
     checkAvailableLogin();
     //配置SDK属性,向SDK注册登录的回调
