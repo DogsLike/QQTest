@@ -134,10 +134,10 @@ SDK.myTest = myTest;
 function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
 {
     appid = appId;
-    appsig = appsig;
-    appsigdata = appsigdata;
+    appsig = appSig;
+    appsigdata = appSigData;
     baseurl = baseUrl;
-    
+
     alert(appsig+"~~"+appid+"~~"+appsigdata+"~~");
     
     loginSuccessCallBack = successCallback;
