@@ -286,7 +286,7 @@ function loginCallBack(rspObj) {
         alert("当前浏览器不支持该登录方式！");
     } else {
         //登录失败处理逻辑
-        alert("登录失败");
+        alert("登录失败"+rspObj.msg);
     }
 }
 
@@ -328,7 +328,6 @@ function checkLogin() {
             qbopenid: openid,
             refreshToken: refreshToken
         };
-        alert("已经登录");
         //刷新token
         QBH5.refreshToken(option, function (rspObj) {
             if (rspObj) {
@@ -349,7 +348,6 @@ function checkLogin() {
             showLogin();// //刷新失败，加载/跳转到登录界面
         });
     } else { //未登录
-        alert("没有登录");
         showLogin();
     }
 }  
@@ -479,7 +477,6 @@ function login(loginType) {
             appsigData: appsigdata,
             loginType: loginType
         };      
-        alert("开始登录");
         QBH5.login(option, loginCallBack);
     }
 }
