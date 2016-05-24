@@ -1,6 +1,7 @@
 var appid;
 var appsig;
-var baseUrl;
+var appsigdata;
+var baseurl;
 var loginSuccessCallBack;
 
 var store = {
@@ -129,11 +130,12 @@ function myTest()
     
 SDK.myTest = myTest;
     
-function _autoLogin(appId,appsig,baseUrl,successCallback)
+function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
 {
     appid = appId;
     appsig = appsig;
-    baseUrl = baseUrl;
+    appsigdata = appsigdata;
+    baseurl = baseUrl;
     loginSuccessCallBack = successCallback;
     var sdk = window.sdk = window.browser.x5gameplayer;
     checkAvailableLogin();
@@ -478,7 +480,7 @@ function login(loginType) {
     var option = {
             appid: appid,
             appsig: appsig,
-            appsigData: QBH5Config.appsigData,
+            appsigData: appsigdata,
             loginType: loginType
         };      
         QBH5.login(option, loginCallBack);
