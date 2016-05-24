@@ -287,7 +287,7 @@ function loginCallBack(rspObj) {
     } else {
         //登录失败处理逻辑
         alert("登录失败"+rspObj.result+"  msg:"+rspObj.msg);
-        for (var i = 0; i < rspObj.msg[0].length; i++) 
+        for (var i = 0; i < rspObj.msg.error[0].length; i++) 
         {
             alert("登录失败"+rspObj.result+"  msg:"+rspObj.msg[0][i]);            
         }
