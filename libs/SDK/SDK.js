@@ -122,7 +122,7 @@ var devServer = {
 };
 
 var SDK;
-(function (egret) {
+(function (SDK) {
         
 function myTest()
 {
@@ -138,17 +138,13 @@ function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
     appsigdata = appsigdata;
     baseurl = baseUrl;
     loginSuccessCallBack = successCallback;
-    var sdk = window.sdk = window.browser.x5gameplayer;
-    
-    var info = sessionInfo = store.getAll();
-
-        checkAvailableLogin();
-        //配置SDK属性,向SDK注册登录的回调
-        sdk.config && sdk.config({
-        loginCallBack: loginCallBack
-        });
-        //检查是否已登录
-        checkLogin();      
+    checkAvailableLogin();
+    //配置SDK属性,向SDK注册登录的回调
+    QBH5.config && QBH5.config({
+    loginCallBack: loginCallBack
+    })
+    //检查是否已登录
+    checkLogin();      
 }
 
 SDK.autoLogin = _autoLogin;
@@ -268,11 +264,7 @@ SDK.pay = pay;
         }
 SDK.getFriends = getFriends;
 
-
-
-
 })(SDK || (SDK = {}));
-
 
 //登录回调函数
 function loginCallBack(rspObj) {
@@ -299,7 +291,7 @@ function loginCallBack(rspObj) {
 }
 
 function checkAvailableLogin() {
-    sdk.getAvailableLoginType({appid: appid}, function (rsp) {
+    QBH5.getAvailableLoginType({appid: appid}, function (rsp) {
         if (rsp && rsp.result === 0) {
             var types = rsp.loginTypes, html = "";           
             for (var i = 0; i < types.length; i++) {
@@ -338,7 +330,7 @@ function checkLogin() {
         };
         alert("已经登录");
         //刷新token
-        sdk.refreshToken(option, function (rspObj) {
+        QBH5.refreshToken(option, function (rspObj) {
             if (rspObj) {
                 if (rspObj.result === 0) { //回调结果成功
                     //更新缓存localStorage
@@ -487,6 +479,7 @@ function login(loginType) {
             appsigData: appsigdata,
             loginType: loginType
         };      
+        alert("开始登录");
         QBH5.login(option, loginCallBack);
     }
 }
