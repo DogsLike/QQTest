@@ -121,13 +121,6 @@ var devServer = {
     }
 };
 
-function init()
-{
-   QBH5.config && QBH5.config({
-        loginCallBack: loginCallBack
-    });   
-}
-
 var SDK;
 (function (egret) {
         
@@ -146,13 +139,23 @@ function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
     baseurl = baseUrl;
     loginSuccessCallBack = successCallback;
     var sdk = window.sdk = window.browser.x5gameplayer;
-    checkAvailableLogin();
-    //配置SDK属性,向SDK注册登录的回调
-    sdk.config && sdk.config({
+    
+    var info = sessionInfo = store.getAll();
+    if (!info.qbopenid || !info.qbopenkey) 
+    {
+        checkAvailableLogin();
+        //配置SDK属性,向SDK注册登录的回调
+        sdk.config && sdk.config({
         loginCallBack: loginCallBack
-    });
-    //检查是否已登录
-    checkLogin();   
+        });
+        //检查是否已登录
+        checkLogin();   
+    }else
+    {
+        document.getElementById("qqlogin").style.display = "block";
+        $("#qqlogin").attr("src",info.avatarUrl);   
+    }
+    
 }
 
 SDK.autoLogin = _autoLogin;
@@ -289,9 +292,6 @@ function loginCallBack(rspObj) {
         ls.setItem("refreshToken", rspObj.refreshToken);
         ls.setItem("nickName", rspObj.nickName);
         ls.setItem("avatarUrl", rspObj.avatarUrl);
-        
-        document.getElementById("qqlogin").style.display = "none";
-        document.getElementById("wxlogin").style.display = "none";
         
         //调用 TS 登录
         loginSuccessCallBack(rspObj.qbopenid,rspObj.nickName,rspObj.avatarUrl);  
