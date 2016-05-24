@@ -121,6 +121,15 @@ var devServer = {
     }
 };
 
+//页面加载完成时执行
+$(document).ready(function () {
+    QBH5.config && QBH5.config({
+        loginCallBack: loginCallBack
+    });
+});
+
+
+
 var SDK;
 (function (SDK) {
         
@@ -137,15 +146,10 @@ function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
     appsig = appSig;
     appsigdata = appSigData;
     baseurl = baseUrl;
-
-    alert(appsig+"~~"+appid+"~~"+appsigdata+"~~");
     
     loginSuccessCallBack = successCallback;
     checkAvailableLogin();
-    //配置SDK属性,向SDK注册登录的回调
-    QBH5.config && QBH5.config({
-    loginCallBack: loginCallBack
-    })
+
     //检查是否已登录
     checkLogin();      
 }
@@ -480,7 +484,6 @@ function login(loginType) {
             appsigData: appsigdata,
             loginType: loginType
         };      
-        alert(option.appid+"~~"+option.appsig+"~~"+appsigdata+"~~"+loginType);
         QBH5.login(option, loginCallBack);
     }
 }
