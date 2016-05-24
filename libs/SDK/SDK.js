@@ -141,22 +141,14 @@ function _autoLogin(appId,appSig,appSigData,baseUrl,successCallback)
     var sdk = window.sdk = window.browser.x5gameplayer;
     
     var info = sessionInfo = store.getAll();
-    if (!info.qbopenid || !info.qbopenkey) 
-    {
+
         checkAvailableLogin();
         //配置SDK属性,向SDK注册登录的回调
         sdk.config && sdk.config({
         loginCallBack: loginCallBack
         });
         //检查是否已登录
-        checkLogin();   
-    }else
-    {
-        util.toast("用户登录！：" + info.nickName);
-        document.getElementById("qqlogin").style.display = "block";
-        $("#qqlogin").attr("src",info.avatarUrl);   
-    }
-    
+        checkLogin();      
 }
 
 SDK.autoLogin = _autoLogin;
@@ -286,6 +278,7 @@ SDK.getFriends = getFriends;
 function loginCallBack(rspObj) {
     //登录成功
     if (rspObj && rspObj.result === 0) {
+        alert("登陆成功");
         //更新缓存
         var ls = window.localStorage;
         ls.setItem("qbopenid", rspObj.qbopenid);
@@ -301,6 +294,7 @@ function loginCallBack(rspObj) {
         alert("当前浏览器不支持该登录方式！");
     } else {
         //登录失败处理逻辑
+        alert("登录失败");
     }
 }
 
@@ -335,12 +329,14 @@ function checkLogin() {
     var openkey = ls.getItem("qbopenkey");
     var refreshToken = ls.getItem("refreshToken");
 
+
     if (openid && openkey && refreshToken) { //已登录
         var option = {
             appid: appid,
             qbopenid: openid,
             refreshToken: refreshToken
         };
+        alert("已经登录");
         //刷新token
         sdk.refreshToken(option, function (rspObj) {
             if (rspObj) {
@@ -361,6 +357,7 @@ function checkLogin() {
             showLogin();// //刷新失败，加载/跳转到登录界面
         });
     } else { //未登录
+        alert("没有登录");
         showLogin();
     }
 }  
